@@ -9,7 +9,7 @@ package September;
  */
 public class UglyNumber {
     public static void main(String[] args) {
-        System.out.println(nthUglyNumber(1665));
+        System.out.println(nthUglyNumber(9));
     }
 
     public static int nthUglyNumber(int n) {
@@ -19,7 +19,7 @@ public class UglyNumber {
             return 1;
         }
         for(int i = 1; ;i++) {
-            if (isUgly(i)) {
+            if (isUglyNumber(i)) {
                 pos++;
                 if (pos == n) {
                     return i;
@@ -28,17 +28,22 @@ public class UglyNumber {
         }
     }
 
-    public static boolean isUgly(int num){
-        if(num < 0){
-            return false;
-        }
-        while (num % 2 == 0) num /=2;
-        while (num % 3 == 0) num /=3;
-        while (num % 5 == 0) num /=5;
-        if(num == 1){
+    public static boolean isUglyNumber(int n){
+        if (n == 1) {
+            // 递归退出条件，n=1
             return true;
-        }else {
+        } else if (n % 2 == 0) {
+            // 说明可以被2整除
+            return isUglyNumber(n / 2);
+        } else if (n % 3 == 0) {
+            // 说明可以被3整除
+            return isUglyNumber(n / 3);
+        } else if (n % 5 == 0) {
+            // 说明可以被5整除
+            return isUglyNumber(n / 5);
+        } else {
             return false;
         }
+
     }
 }
